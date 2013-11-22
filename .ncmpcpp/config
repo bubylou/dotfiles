@@ -1,0 +1,12 @@
+mpd_music_dir=		"/mnt/share/Music"
+
+audio_output {
+	type		"alsa"
+	name		"ALSA"
+}
+
+audio_output {
+	type	    	"fifo"
+	name	    	"FIFO"
+	path	    	"/tmp/mpd.fifo"
+}

@@ -21,7 +21,7 @@ syntax on
 
 " If using a dark background within the edit
 set background=dark
-colorscheme base16-tomorrow 
+colorscheme base16-default
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -43,9 +43,14 @@ set ignorecase		" Do case insensitive matching
 set smartcase		" Do smart case matching
 set incsearch		" Incremental search
 set autowrite		" Automatically save before commands like :next and :make
-set hidden             " Hide buffers when they are abandoned
-"set mouse=a		" Enable mouse usage (all modes)
-set number
+set hidden              " Hide buffers when they are abandoned
+set mouse=a		" Enable mouse usage (all modes)
+set nu
+set splitbelow
+set splitright
+set laststatus=2
+
+let g:airline_powerline_fonts = 1
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
@@ -67,3 +72,8 @@ Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
 Bundle 'kien/ctrlp.vim'
+Bundle 'bling/vim-airline'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'garbas/vim-snipmate'
+Bundle 'honza/vim-snippets'

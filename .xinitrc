@@ -1,5 +1,5 @@
 #theme
-feh --bg-fill ~/wheezy.png &
+feh --bg-fill ~/Pictures/wheezy.png &
 (conky | while read LINE; do xsetroot -name "$LINE"; done) &
 
 #custom
