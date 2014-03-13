@@ -49,6 +49,9 @@ set nu
 set splitbelow
 set splitright
 set laststatus=2
+set nowrap
+set noswapfile
+set autoread
 
 let g:airline_powerline_fonts = 1
 
@@ -62,6 +65,15 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+map <leader>y :CtrlPBuffer<cr>
+map <leader>' :NERDTreeToggle<cr>
+nmap <leader>o :set paste!<cr>
+
+
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -69,10 +81,7 @@ Bundle 'gmarik/vundle'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-fugitive'
 Bundle 'kien/ctrlp.vim'
-Bundle 'bling/vim-airline'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'garbas/vim-snipmate'

@@ -88,14 +88,16 @@ bindsym $mod+a focus parent
 bindsym $mod+c focus child
 
 # workspace variables
-set $WS1 www
-set $WS2 term
-set $WS3 code
-set $WS4 ssh
-set $WS5 music
-set $WS6 chat
-set $WS7 game
-set $WS8 misc
+set $WS1 1:www
+set $WS2 2:term
+set $WS3 3:code
+set $WS4 4:ssh
+set $WS5 5:game
+set $WS6 6:video
+set $WS7 7:www
+set $WS8 8:music
+set $WS9 9:chat
+set $WS0 10:misc
 
 # switch to workspace
 bindsym $mod+1 workspace $WS1
@@ -106,6 +108,8 @@ bindsym $mod+5 workspace $WS5
 bindsym $mod+6 workspace $WS6
 bindsym $mod+7 workspace $WS7
 bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
+bindsym $mod+0 workspace $WS0
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $WS1
@@ -116,6 +120,24 @@ bindsym $mod+Shift+5 move container to workspace $WS5
 bindsym $mod+Shift+6 move container to workspace $WS6
 bindsym $mod+Shift+7 move container to workspace $WS7
 bindsym $mod+Shift+8 move container to workspace $WS8
+bindsym $mod+Shift+9 move container to workspace $WS9
+bindsym $mod+Shift+0 move container to workspace $WS0
+
+# set which workspace goes to which monitor
+workspace $WS1 output DFP5 
+workspace $WS2 output DFP5 
+workspace $WS3 output DFP5 
+workspace $WS4 output DFP5 
+workspace $WS5 output DFP5 
+workspace $WS6 output DFP5 
+workspace $WS7 output DFP6 
+workspace $WS8 output DFP6 
+workspace $WS9 output DFP6 
+workspace $WS0 output DFP6 
+
+# Move the current workspace to the next output
+# # (effectively toggles when you only have two outputs)
+bindsym $mod+x move workspace to output right
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -155,7 +177,7 @@ bindsym $mod+r mode "resize"
 bar {
         status_command conky
 	position top
-	tray_output primary
+	tray_output DFP5
 	font -*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*
 	colors {
 		background #151515
@@ -164,15 +186,15 @@ bar {
 	}
 }
 
-assign [class="Iceweasel"] $WS1
+assign [class="Steam"] $WS5
+assign [class="xbmc.bin"] $WS6
+assign [class="Ts3client_linux_amd64"] $WS9
 
-for_window [class="Iceweasel" instance="Browser"] floating disable
-for_window [class="Iceweasel" instance="Download"] floating enable
+for_window [class="Firefox" instance="Browser"] floating disable
+for_window [class="Firefox" instance="Download"] floating enable
 for_window [window_role="pop-up"] floating enable,move absolute center
 for_window [class="mpv"] floating enable
-for_window [class="Steam"] floating enable
-
-exec iceweasel
+for_window [class="xbmc.bin"] floating disable,fullscreen
 
 bindsym $mod+Escape exec ncmpcpp toggle
 bindsym $mod+F1 exec ncmpcpp prev
