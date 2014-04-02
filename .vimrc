@@ -53,8 +53,6 @@ set nowrap
 set noswapfile
 set autoread
 
-let g:airline_powerline_fonts = 1
-
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
@@ -69,17 +67,11 @@ map <leader>y :CtrlPBuffer<cr>
 map <leader>' :NERDTreeToggle<cr>
 nmap <leader>o :set paste!<cr>
 
-
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
-
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
 Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
 Bundle 'kien/ctrlp.vim'
 Bundle 'MarcWeber/vim-addon-mw-utils'

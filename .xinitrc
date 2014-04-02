@@ -15,6 +15,7 @@ urxvtd -q -o -f &
 unclutter -root &
 mpd ~/.mpd/mpd.conf &
 thunar --daemon &
+dropbox start &
 
 #startup
 firefox &
