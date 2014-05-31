@@ -21,7 +21,7 @@ syntax on
 
 " If using a dark background within the edit
 set background=dark
-colorscheme base16-default
+colorscheme base16-tomorrow
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -32,7 +32,7 @@ endif
 " Uncomment the following to have Vim load indentation rules and plugins
 " according to the detected filetype.
 if has("autocmd")
-  filetype plugin indent on
+ filetype plugin indent on
 endif
 
 " The following are commented out as they cause vim to behave a lot
@@ -49,9 +49,14 @@ set nu
 set splitbelow
 set splitright
 set laststatus=2
+set noshowmode
 set nowrap
 set noswapfile
 set autoread
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set pastetoggle=<F2>
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
@@ -67,6 +72,8 @@ map <leader>y :CtrlPBuffer<cr>
 map <leader>' :NERDTreeToggle<cr>
 nmap <leader>o :set paste!<cr>
 
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -78,3 +85,4 @@ Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'garbas/vim-snipmate'
 Bundle 'honza/vim-snippets'
+Bundle 'Lokaltog/powerline'
