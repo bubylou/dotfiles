@@ -190,12 +190,12 @@ bar {
 	tray_output DFP5
 	font -*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*
 	colors {
-		background          #1d1f21
-		statusline          #ffffff
-        focused_workspace   #81a2be #81a2be #ffffff
-        active_workspace    #373b41 #373b41 #e0e0e0
-        inactive_workspace  #282a2e #282a2e #c5c8c6
-        urgent_workspace    #ffffff #cc6666
+            background          #1d1f21
+            statusline          #ffffff
+            focused_workspace   #81a2be #81a2be #ffffff
+            active_workspace    #373b41 #373b41 #e0e0e0
+            inactive_workspace  #282a2e #282a2e #c5c8c6
+            urgent_workspace    #ffffff #cc6666
 	}
 }
 
