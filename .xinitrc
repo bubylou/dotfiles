@@ -4,9 +4,6 @@ feh --bg-fill ~/Pictures/wheezy.png &
 
 #custom
 xset -b &
-xset s off &
-xset -dpms &
-xset s noblank &
 xrdb -merge .Xresources &
 xmodmap ~/.xmodmap &
 
@@ -15,6 +12,7 @@ urxvtd -q -o -f &
 unclutter -root &
 mpd ~/.mpd/mpd.conf &
 dropbox start &
+xscreensaver &
 
 #startup
 firefox &
