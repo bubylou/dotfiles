@@ -1,0 +1,8 @@
+ctrlp.vim
+neobundle.vim
+neocomplete.vim
+neosnippet-snippets.vim
+neosnippet.vim
+nerdtree
+powerline
+syntastic
