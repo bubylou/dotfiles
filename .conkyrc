@@ -9,9 +9,9 @@ TEXT
 $if_mpd_playing\
 $mpd_smart |\
 $endif \
-VOL: ${exec amixer get 'Master',0 | egrep -m 1 -o '[0-9]{1,3}%'} | \
+VOL: ${exec amixer get 'Master,0' | grep -m 1 -o '[0-9]\{1,3\}%'} | \
 CPU: ${cpu cpu1}% | \
-TEM: ${execi 6 sensors | grep temp1: | cut -c 16-17}°C | \
+TEM: ${execi 6 sensors | grep temp1 | cut -c 16-23 | tr -d '\n'}| \
 MEM: $mem | \
 ${if_existing /sys/class/power_supply/BAT0}\
 BAT: $battery_short | \
