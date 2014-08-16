@@ -1,0 +1,29 @@
+#!/bin/bash
+
+PANEL_FIFO=/tmp/panel-fifo
+PANEL_HEIGHT=24
+PANEL_FONT_FAMILY="-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*"
+
+if [ $(pgrep -cx panel) -gt 1 ] ; then
+    printf "%s\n" "The panel is already running." >&2
+    exit 1
+fi
+
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+
+bspc control --subscribe > "$PANEL_FIFO" &
+conky > "$PANEL_FIFO" &
+
+. panel_colors
+
+cat "$PANEL_FIFO" | tee \
+    >(sed -u "s/:.DVI-0.*X:L.//" | panel_bar | \
+    bar -g 1920x$PANEL_HEIGHT+1280 -u 0 -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" | \
+    while read line; do eval "$line"; done) \
+    >(sed -ue "s/.HDMI-0.*VI:L.://" | panel_bar | \
+    bar -g 1280x$PANEL_HEIGHT -u 0 -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" | \
+    while read line; do eval "$line"; done) \
+    >/dev/null &
+
+wait

@@ -1,0 +1,22 @@
+#! /bin/sh
+
+bspc config border_width        2
+bspc config window_gap          8
+bspc config top_padding         24
+
+bspc config split_ratio         0.50
+bspc config borderless_monocle  true
+bspc config gapless_monocle     true
+bspc config focus_by_distance   true
+bspc config focus_follows_pointer true
+bspc config auto_alternate      true
+bspc config auto_cancel         true
+
+bspc monitor HDMI-0 -d I II III IV V VI
+bspc monitor DVI-0 -d VII VIII IX X
+
+bspc rule -a Steam desktop=^5 follow=off focus=off
+bspc rule -a "TeamSpeak 3" desktop=^9 follow=off focus=off
+bspc rule -a xbmc.bin desktop=^6 focus=on fullscreen=on
+
+panel &
