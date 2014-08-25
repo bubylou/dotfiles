@@ -10,6 +10,7 @@ urxvtd -q -o -f &
 unclutter -root &
 parcellite &
 mpd ~/.mpd/mpd.conf &
+mpd-notification &
 dropbox start &
 xscreensaver -no-splash &
 
