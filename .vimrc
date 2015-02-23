@@ -23,6 +23,8 @@ syntax on
 set background=dark
 colorscheme base16-tomorrow
 
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
+
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
 if has("autocmd")
@@ -57,6 +59,11 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set pastetoggle=<F2>
+set guioptions-=r
+set guioptions-=L
+set guioptions-=T
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
@@ -99,9 +106,13 @@ Bundle 'gmarik/vundle'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
+Bundle 'Xuyuanp/nerdtree-git-plugin'
 Bundle 'Lokaltog/powerline'
 Bundle 'Shougo/neocomplete.vim'
 Bundle 'Shougo/neosnippet.vim'
 Bundle 'Shougo/neosnippet-snippets'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-speeddating'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-fugitive'
