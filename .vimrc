@@ -45,15 +45,15 @@ set ignorecase		" Do case insensitive matching
 set smartcase		" Do smart case matching
 set incsearch		" Incremental search
 set autowrite		" Automatically save before commands like :next and :make
-set hidden              " Hide buffers when they are abandoned
-set mouse=a		" Enable mouse usage (all modes)
-set nu
+set hidden          " Hide buffers when they are abandoned
+set mouse=a		    " Enable mouse usage (all modes)
+set nu relativenumber
 set splitbelow
 set splitright
 set laststatus=2
+set showtabline=2
 set noshowmode
 set nowrap
-set noswapfile
 set autoread
 set tabstop=4
 set shiftwidth=4
@@ -63,13 +63,13 @@ set guioptions-=r
 set guioptions-=L
 set guioptions-=T
 set noerrorbells visualbell t_vb=
-autocmd GUIEnter * set visualbell t_vb=
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
 
+nnoremap <Space> zA
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
