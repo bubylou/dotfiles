@@ -13,5 +13,5 @@ audio_output {
 
 visualizer_fifo_path = "/tmp/mpd.fifo"
 visualizer_output_name = "FIFO"
-visualizer_sync_interval = "1"
+visualizer_sync_interval = "10"
 visualizer_type = "wave"

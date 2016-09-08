@@ -1,22 +1,19 @@
 #!/bin/sh
-. ~/.profile
+source ~/.profile
 xset -b
 xsetroot -cursor_name left_ptr
 xrdb ~/.Xresources
-xmodmap ~/.xmodmap &
-feh --bg-fill ~/Pictures/wheezy.png &
+feh --bg-fill /mnt/hdd/Pictures/wheezy.png &
 
 urxvtd -q -o -f &
 unclutter -root &
-parcellite &
+xscreensaver -no-splash &
 mpd ~/.mpd/mpd.conf &
 mpd-notification &
-dropbox start &
-xscreensaver -no-splash &
 
-firefox &
+google-chrome &
 steam &
 teamspeak &
 
-sxhkd &
+sxhkd -f 100 &
 exec bspwm

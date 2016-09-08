@@ -1,29 +1,37 @@
 #!/bin/bash
 
-PANEL_FIFO=/tmp/panel-fifo
-PANEL_HEIGHT=24
-PANEL_FONT_FAMILY="-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*"
-
-if [ $(pgrep -cx panel) -gt 1 ] ; then
-    printf "%s\n" "The panel is already running." >&2
-    exit 1
+if xdo id -a "$PANEL_WM_NAME" > /dev/null ; then
+	printf "%s\n" "The panel is already running." >&2
+	exit 1
 fi
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
 [ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
 mkfifo "$PANEL_FIFO"
 
-bspc control --subscribe > "$PANEL_FIFO" &
+bspc config top_padding $PANEL_HEIGHT
+bspc subscribe report > "$PANEL_FIFO" &
 conky > "$PANEL_FIFO" &
 
-. panel_colors
+source panel_colors
 
-cat "$PANEL_FIFO" | tee \
-    >(sed -u "s/:.DVI-0.*X:L.//" | panel_bar | \
-    bar -g 1920x$PANEL_HEIGHT+1280 -u 0 -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" | \
+tee < "$PANEL_FIFO" \
+    >(sed -u "s/:.DVI-D-0.*X:L.//" | panel_bar | \
+    lemonbar -a 32 -n "$PANEL_WM_NAME" -g 1920x$PANEL_HEIGHT -f "$PANEL_FONT" -F "$COLOR_DEFAULT_FG" -B "$COLOR_DEFAULT_BG" | \
     while read line; do eval "$line"; done) \
     >(sed -ue "s/.HDMI-0.*VI:L.://" | panel_bar | \
-    bar -g 1280x$PANEL_HEIGHT -u 0 -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" | \
+    lemonbar -a 32 -n "$PANEL_WM_NAME" -g 1280x$PANEL_HEIGHT+1920 -f "$PANEL_FONT" -F "$COLOR_DEFAULT_FG" -B "$COLOR_DEFAULT_BG" | \
     while read line; do eval "$line"; done) \
-    >/dev/null &
+    >/dev/null
+
+wid=$(xdo id -a "$PANEL_WM_NAME")
+tries_left=20
+while [ -z "$wid" -a "$tries_left" -gt 0 ] ; do
+	sleep 0.05
+	wid=$(xdo id -a "$PANEL_WM_NAME")
+	tries_left=$((tries_left - 1))
+done
+[ -n "$wid" ] && xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" "$wid"
 
 wait
