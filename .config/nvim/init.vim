@@ -21,7 +21,6 @@ syntax on
 
 " If using a dark background within the edit
 set background=dark
-colorscheme base16-tomorrow
 
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
 
@@ -69,19 +68,25 @@ if filereadable("/etc/vim/vimrc.local")
 endif
 
 nnoremap <F1> <nop>
-nnoremap <F5> :GundoToggle<CR>
-nnoremap <Space> za
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-
-map <leader>y :CtrlPBuffer<cr>
-map <leader>' :NERDTreeToggle<cr>
-nmap <leader>o :set paste!<cr>
+nnoremap <silent><C-p> :Files<CR>
 
 let g:airline_powerline_fonts = 1
 autocmd! BufWritePost * Neomake
+
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -102,16 +107,19 @@ if has('conceal')
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'
 Plug 'neomake/neomake'
-Plug 'scrooloose/nerdtree'
-Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'Raimondi/delimitMate'
 Plug 'chase/vim-ansible-yaml'
 Plug 'bling/vim-airline'
-Plug 'Shougo/deoplete.nvim'
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
+Plug 'chriskempson/base16-vim'
 call plug#end()
+
+colorscheme base16-tomorrow
