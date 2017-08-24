@@ -3,6 +3,7 @@
 # for examples
 
 alias tmux="tmux -2"
+eval "$(_SSM_COMPLETE=source ssm)"
 
 # If not running interactively, don't do anything
 case $- in
