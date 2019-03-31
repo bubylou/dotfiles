@@ -61,6 +61,10 @@ set scrolloff=8
 set cursorline
 set foldmethod=indent
 set nohlsearch
+set inccommand=nosplit
+
+" yaml indentation
+au FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
@@ -114,19 +118,45 @@ tnoremap <C-l> <C-\><C-N><C-w>l
 
 autocmd BufEnter term://* startinsert
 
+let g:lightline = {
+      \ 'colorscheme': 'powerline',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
+
+nmap <C-n> :NERDTreeToggle<CR>
+nnoremap <M-m> :MarkdownPreview<CR>
+
+" make test commands execute using dispatch.vim
+let test#strategy = 'neovim'
+
 call plug#begin('~/.config/nvim/plugged')
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'
 Plug 'neomake/neomake'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'chase/vim-ansible-yaml'
-Plug 'bling/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'chriskempson/base16-vim'
+Plug 'cespare/vim-toml'
+Plug 'w0rp/ale'
+Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/nerdTree'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+Plug 'janko-m/vim-test'
+Plug 'roxma/vim-tmux-clipboard'
+Plug 'fatih/vim-go'
 call plug#end()
 
 colorscheme base16-tomorrow
+let g:deoplete#enable_at_startup = 1
